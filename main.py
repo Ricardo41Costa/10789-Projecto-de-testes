@@ -41,20 +41,15 @@ def use_database(db):
 def clear():
     os.system('cls' if os.name=='nt' else 'clear')
 
-def insert_data(db, id = -1):
+def insert_data(db):
     try:
         cursor = db.cursor()
         nome = input("Enter product name: ")
         amount = int(input("Enter product amount: "))
 
-        if id > 0:
-            val = (id, nome, amount)
-            sql = "INSERT INTO produtos(id, nome, quantidade) VALUES (%s, %s, %s)"
-            cursor.execute(sql, val)
-        else:
-            val = (nome, amount)
-            sql = "INSERT INTO produtos(nome, quantidade) VALUES (%s, %s)"
-            cursor.execute(sql, val)
+        val = (nome, amount)
+        sql = "INSERT INTO produtos(nome, quantidade) VALUES (%s, %s)"
+        cursor.execute(sql, val)
         
         db.commit()
         print("{} data Inserted".format(cursor.rowcount))
