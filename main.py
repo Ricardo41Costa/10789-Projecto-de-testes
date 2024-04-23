@@ -106,10 +106,11 @@ def delete_data(db):
         print("Please make sure you have entered valid values.")
         delete_data(db)
 
-def search_data(db):
+def search_data(db, keyword = ""):
     try:
         cursor = db.cursor()
-        keyword = input("Keyword: ")
+        if keyword == "":
+            keyword = input("Keyword: ")
         sql = "SELECT * FROM produtos WHERE nome LIKE %s"
         val = ("%{}%".format(keyword), )
         cursor.execute(sql, val)
